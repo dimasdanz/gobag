@@ -1,0 +1,27 @@
+linters-setting:
+  misspell:
+    locale: US
+linters:
+  disable-all: true
+  enable:
+    - deadcode
+    - dupl
+    - errcheck
+    - gosec
+    - goconst
+    - gocyclo
+    - gofmt
+    - goimports
+    - gosimple
+    - govet
+    - ineffassign
+    - interfacer
+    - lll
+    - misspell
+    - staticcheck
+    - structcheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - varcheck
