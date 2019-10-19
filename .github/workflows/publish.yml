@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Setup Go
         uses: actions/setup-go@v1
+        with:
+          version: '1.13'
       - name: Checkout
         uses: actions/checkout@master
       - name: Download dependencies
