@@ -1,5 +1,8 @@
 name: Test
-on: [push]
+on:
+  push:
+    branches:
+      - '*'
 
 jobs:
   test:
@@ -19,4 +22,4 @@ jobs:
       - name: Download dependencies
         run: go mod download
       - name: Run test
-        run: go test
+        run: go test -test.v

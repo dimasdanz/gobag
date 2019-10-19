@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@master
       - name: Download dependencies
         run: go mod download
-      - name: Run test
+      - name: Run test with coverage
         run: go test -test.v -coverprofile=coverage.out -covermode=count
       - name: Publish coverage
         uses: codecov/codecov-action@v1.0.3
