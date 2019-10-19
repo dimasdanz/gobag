@@ -18,6 +18,7 @@ import (
 	"strings"
 )
 
+// Bag only contains contains filtered or unexported fields
 type Bag struct {
 	items interface{}
 }
