@@ -1,0 +1,14 @@
+*.o
+*.a
+*.so
+.env
+*.out
+*.html
+vendor/
+.DS_Store
+.*.sw?
+*~
+*.log
+.idea
+.vscode
+*.pem

@@ -1,0 +1,22 @@
+name: Test
+on: [push]
+
+jobs:
+  test:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        go: ['1.12', '1.13']
+    steps:
+      - name: Go ${{ matrix.go }}
+        uses: actions/setup-go@v1
+        with:
+          version: ${{ matrix.go }}
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Download dependencies
+        run: go mod download
+      - name: Run test
+        run: go test
