@@ -1,12 +1,16 @@
 // Package gobag provides a simple utility to read json response without any custom struct.
 // Works for nested json using dot notation
+//
 // A quick usage
-// supposed body is a json like this {"name": "gobag", "amount": 1}
-// var data map[string]interface{}
-// _ = json.Unmarshal(body, &data)
-// bag := gobag.Bagify(data)
-// bag.GetString("name") // gobag
-// bag.GetInt("amount") // 1
+//
+// supposed body is a json like this
+//  {"name": "gobag", "amount": 1}
+// then
+//  var data map[string]interface{}
+//  _ = json.Unmarshal(body, &data)
+//  bag := gobag.Bagify(data)
+//  bag.GetString("name") // gobag
+//  bag.GetInt("amount") // 1
 package gobag
 
 import (
