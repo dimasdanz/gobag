@@ -40,7 +40,11 @@ const payload = `
 		1,
 		2,
 		3
-	]
+	],
+	"map_string": {
+		"foo": "bar",
+		"baz": 1
+	}
 }`
 
 func (s *BagTestSuite) TestEmpty() {
@@ -71,6 +75,7 @@ func (s *BagTestSuite) TestCorrect() {
 	s.Assert().Equal([]string{"foo", "bar"}, bag.GetArrayString("array"))
 	s.Assert().Equal([]int{1, 2, 3}, bag.GetArrayInt("array_of_int"))
 	s.Assert().Equal([]float64{1, 2, 3}, bag.GetArrayFloat("array_of_int"))
+	s.Assert().Equal(map[string]interface{}{"baz": float64(1), "foo": "bar"}, bag.GetMapString("map_string"))
 }
 
 func (s *BagTestSuite) TestIncorrect() {
@@ -93,6 +98,7 @@ func (s *BagTestSuite) TestIncorrect() {
 	s.Assert().Equal([]int{0, 0}, bag.GetArrayInt("array"))
 	s.Assert().Equal([]float64{}, bag.GetArrayFloat("string"))
 	s.Assert().Equal([]float64{0, 0}, bag.GetArrayFloat("array"))
+	s.Assert().Equal(map[string]interface{}{}, bag.GetMapString("array"))
 }
 
 func TestResponseBag(t *testing.T) {
