@@ -22,4 +22,4 @@ jobs:
       - name: Download dependencies
         run: go mod download
       - name: Run test
-        run: go test -test.v
+        run: go test -v

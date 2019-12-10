@@ -170,6 +170,16 @@ func (b Bag) GetBool(key string) bool {
 	return false
 }
 
+// GetArray returns map[string]interface{}
+func (b Bag) GetMapString(key string) map[string]interface{} {
+	val, ok := b.Get(key).(map[string]interface{})
+	if ok {
+		return val
+	}
+
+	return map[string]interface{}{}
+}
+
 // value returns its underlying data by key
 // returns nil when something wrong happens
 // for shortcircuiting
