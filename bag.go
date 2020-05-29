@@ -62,6 +62,16 @@ func (b Bag) Get(key string) interface{} {
 	return i
 }
 
+// Get a value of any key including nested key by using dot notation
+func (b Bag) GetArray(key string) []interface{} {
+	val, ok := b.Get(key).([]interface{})
+	if ok {
+		return val
+	}
+
+	return []interface{}{}
+}
+
 // GetString returns value in string
 func (b Bag) GetString(key string) string {
 	val, ok := b.Get(key).(string)
@@ -75,13 +85,10 @@ func (b Bag) GetString(key string) string {
 // GetArrayString returns value in array of string
 // defaults to "" if any of the member is not integer
 func (b Bag) GetArrayString(key string) []string {
-	val, ok := b.Get(key).([]interface{})
-	if !ok {
-		return []string{}
-	}
+	val := b.GetArray(key)
 
 	v := make([]string, len(val))
-	for i := range val {
+	for i := range b.GetArray(key) {
 		f, ok := val[i].(string)
 		if ok {
 			v[i] = f
@@ -113,19 +120,26 @@ func (b Bag) GetInt(key string) int {
 // GetArrayInt returns value in array of integer
 // defaults to 0 if any of the member is not integer
 func (b Bag) GetArrayInt(key string) []int {
-	val, ok := b.Get(key).([]interface{})
-	if !ok {
-		return []int{}
-	}
+	val := b.GetArray(key)
 
 	v := make([]int, len(val))
 	for i := range val {
 		f, ok := val[i].(float64)
 		if ok {
 			v[i] = int(f)
-		} else {
-			v[i] = 0
+
+			continue
 		}
+
+		// if somehow json number detected as int
+		valInt, ok := val[i].(int)
+		if ok {
+			v[i] = valInt
+
+			continue
+		}
+
+		v[i] = 0
 	}
 
 	return v
@@ -144,10 +158,7 @@ func (b Bag) GetFloat(key string) float64 {
 // GetArrayFloat returns value in array of float64
 // defaults to 0 if any of the member is not float64
 func (b Bag) GetArrayFloat(key string) []float64 {
-	val, ok := b.Get(key).([]interface{})
-	if !ok {
-		return []float64{}
-	}
+	val := b.GetArray(key)
 
 	v := make([]float64, len(val))
 	for i := range val {
@@ -176,7 +187,7 @@ func (b Bag) GetBool(key string) bool {
 	return false
 }
 
-// GetArray returns map[string]interface{}
+// GetMapString returns map[string]interface{}
 func (b Bag) GetMapString(key string) map[string]interface{} {
 	val, ok := b.Get(key).(map[string]interface{})
 	if ok {
