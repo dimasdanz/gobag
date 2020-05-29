@@ -11,12 +11,12 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        go: ['1.12', '1.13']
+        go: ['1.12', '1.13', '1.14']
     steps:
       - name: Go ${{ matrix.go }}
         uses: actions/setup-go@v1
         with:
-          version: ${{ matrix.go }}
+          go-version: ${{ matrix.go }}
       - name: Checkout
         uses: actions/checkout@master
       - name: Download dependencies
