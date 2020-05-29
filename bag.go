@@ -95,10 +95,16 @@ func (b Bag) GetArrayString(key string) []string {
 
 // GetInt returns value in integer. Works for json numbers
 func (b Bag) GetInt(key string) int {
-	// json integer is float64
+	// json number is float64
 	val, ok := b.Get(key).(float64)
 	if ok {
 		return int(val)
+	}
+
+	// if somehow json number detected as int
+	valInt, ok := b.Get(key).(int)
+	if ok {
+		return valInt
 	}
 
 	return 0
